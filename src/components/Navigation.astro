@@ -7,15 +7,9 @@ const currentPath = Astro.url.pathname.split('/').at(2);
     <nav>
         <h6 class="max primary-text"><a href={`/${REPO_NAME}`}> VG Ridelines</a></h6>
         <a href={`/${REPO_NAME}/decks`}>
-            <button class={currentPath === 'decks' ? 'primary' : 'border'}>
+            <button class={(currentPath === 'decks' || currentPath === 'prices') ? 'primary' : 'border'}>
                 <i>playing_cards</i>
                 Decks
-            </button>
-        </a>
-        <a href={`/${REPO_NAME}/prices`}>
-            <button class={currentPath === 'prices' ? 'primary' : 'border'}>
-                <i>price_check</i>
-                Prices
             </button>
         </a>
         <ModeToggle client:only="react"/>

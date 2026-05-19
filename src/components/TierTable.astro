@@ -1,0 +1,53 @@
+---
+import {deckTotalStats} from "../pricing.ts";
+---
+<table>
+    <thead>
+    <tr>
+        <th>Tier</th>
+        <th>Range</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>
+            💲
+        </td>
+        <td>
+            $0 - ${(deckTotalStats.tier1 - .01).toFixed(2)}
+        </td>
+    </tr>
+    <tr>
+        <td>
+            💲💲
+        </td>
+        <td>
+            ${deckTotalStats.tier1.toFixed(2)}- ${deckTotalStats.tier2.toFixed(2) - .01}
+        </td>
+    </tr>
+    <tr>
+        <td>
+            💲💲💲
+        </td>
+        <td>
+            ${deckTotalStats.tier2.toFixed(2)}- ${deckTotalStats.tier3.toFixed(2) - .01}
+        </td>
+    </tr>
+    <tr>
+        <td>
+            💲💲💲💲
+        </td>
+        <td>
+            ${deckTotalStats.tier3.toFixed(2)}- ${deckTotalStats.tier4.toFixed(2) - .01}
+        </td>
+    </tr>
+    <tr>
+        <td>
+            💲💲💲💲
+        </td>
+        <td>
+            ${deckTotalStats.tier4.toFixed(2)}+
+        </td>
+    </tr>
+    </tbody>
+</table>

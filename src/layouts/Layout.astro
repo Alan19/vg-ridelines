@@ -6,6 +6,7 @@ import Navigation from "../components/Navigation.astro";
 import Footer from '../components/Footer.astro';
 import {Font} from "astro:assets";
 import '../styles/global.css';
+import PriceSwitch from '../components/PriceSwitch.astro';
 
 const props = Astro.props;
 const nation = props.nation
@@ -15,8 +16,8 @@ const nation = props.nation
 <html lang="en">
 <head>
     <BaseHead title={SITE_TITLE + " - " + props.title} description={SITE_DESCRIPTION}/>
-    <Font cssVariable='--font-outfit' />
-    <Font cssVariable='--font-audiowide' />
+    <Font cssVariable='--font-outfit'/>
+    <Font cssVariable='--font-audiowide'/>
     <meta charset="UTF-8">
     <link href="/src/styles/showcase.css" rel="stylesheet" type="text/css"/>
     <!--TODO Update BeerCSS-->
@@ -54,6 +55,9 @@ const nation = props.nation
 <body>
 <Navigation/>
 <slot/>
+<div style="position:fixed; right: 1rem; bottom: 1rem;z-index: 10">
+    <PriceSwitch/>
+</div>
 <Footer/>
 </body>
 </html>

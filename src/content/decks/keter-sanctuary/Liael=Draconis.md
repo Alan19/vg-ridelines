@@ -1,5 +1,5 @@
 ---
-title: Liael=Draconis
+title: Liael Draconis
 nation: Keter Sanctuary
 card-art: '../../../assets/Liael=Draconis.webp'
 rideline: [

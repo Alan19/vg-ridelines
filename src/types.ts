@@ -14,7 +14,7 @@ export type CardDatabaseEntry = {
 }
 export type DeckCardPricing = {
     name: string
-    url?: string
+    url: string
     lowPrice?: number
     quantity: number
 };

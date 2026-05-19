@@ -4,25 +4,35 @@ import {getCollection} from "astro:content";
 import {pricingGuide} from "../../pricing.ts";
 import {PricingCard} from "../../layouts/PricingCard.tsx";
 import Image from "astro/components/Image.astro";
-import {Content as Blurb} from './_blurb.mdx'
 import {REPO_NAME} from "../../consts.ts";
+import {Nation} from "../../content.config.ts";
 
 const decks = await getCollection('decks').then(deckCollection => deckCollection.map(value => ({id: value.id, title: value.data.title, nation: value.data.nation, pricing: pricingGuide[value.id], artwork: value.data["card-art"]}))
-        .filter(value => value.pricing))
+    .filter(value => value.pricing))
 // TODO Add generic / pile warning
 ---
 <Layout>
     <main class="responsive">
-        <Blurb/>
-        <div class={"grid"}>
-            {decks.map(value => {
-                const deckName = value.id
-                return (<a href={`/${REPO_NAME}/decks/${deckName}/pricing`} style="display: contents">
-                    <PricingCard name={value.title} nation={value.nation} pricing={value.pricing}>
-                        <Image style={{minHeight: "100%", minWidth: "100%", objectFit: "cover", objectPosition: "top", "--_size": 0}} widths={[500]} transition:name={`img_${value.title}`} class="responsive" src={value.artwork} alt={value.title}/>
-                    </PricingCard>
-                </a>)
-            })}
+        <div style="display: flex;align-items: start; gap: 1rem" class="reverse-flex-mobile">
+            <div style="width: 100%">
+                {Object.values(Nation).map(nation =>
+                        <section>
+                            <h4>{nation}</h4>
+                            <div class="grid">
+                                {decks.filter(post => post.nation === nation).map(post =>
+                                        <a href={`/${REPO_NAME}/decks/${post.id}/pricing`} style="display: contents">
+                                            <PricingCard name={post.title} nation={post.nation} pricing={post.pricing}>
+                                                <Image style={{minHeight: "100%", minWidth: "100%", objectFit: "cover", objectPosition: "top", "--_size": 0}}
+                                                       widths={[500]}
+                                                       transition:name={`img_${post.title}`}
+                                                       class="responsive"
+                                                       src={post.artwork}
+                                                       alt={post.title}/>
+                                            </PricingCard>
+                                        </a>)}
+                            </div>
+                        </section>)}
+            </div>
         </div>
     </main>
 </Layout>

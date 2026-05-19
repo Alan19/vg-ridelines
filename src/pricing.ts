@@ -29,7 +29,7 @@ export async function getCheapestListing(name: string): Promise<CardDatabaseEntr
     if (cards.length) {
         return cards.reduce((previousValue, currentValue) => currentValue.lowPrice < previousValue.lowPrice ? currentValue : previousValue, cards[0]);
     } else {
-        throw new Error(`No listings found for this ${name}!`);
+        return value.reduce((previousValue, currentValue) => currentValue.name.length < previousValue.name.length ? currentValue : previousValue, value[0]);
     }
 }
 
@@ -129,8 +129,7 @@ export function getPricingTier(price: number, category: PricingCategory = Pricin
 
 export async function getCardListPricing(cards: DeckCardEntry[]): Promise<DeckCardPricing[]> {
     return Promise.all(cards.map(value => getCheapestListing(value.Name)
-        .then(listing => ({name: value.Name, url: listing.url, lowPrice: listing.lowPrice, quantity: value.Quantity}))
-        .catch(() => ({name: value.Name, quantity: value.Quantity}))))
+        .then(listing => ({name: value.Name, url: listing.url, lowPrice: listing.lowPrice, quantity: value.Quantity}))))
 }
 
 /**
