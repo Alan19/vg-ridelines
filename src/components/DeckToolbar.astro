@@ -22,25 +22,25 @@ function getOppositeViewLink() {
     <h2>Pricing Tiers</h2>
     <TierTable/>
 </dialog>
-<nav class="center-align tiny-space" style="position: sticky; bottom: 1rem; z-index: 10000" transition:name="toolbar">
-    <nav class="toolbar secondary-container small-elevate" transition:name="inner-toolbar">
+<nav class="center-align tiny-space" style="position: sticky; bottom: 1rem; z-index: 10000">
+    <nav class="toolbar secondary-container small-elevate">
         {(matched?.length ?? 0) > 1 && matched?.at(0) === "decks" &&
-                <button onclick="history.back()" class="transparent circle">
+                <button onclick="history.back()" class="transparent circle" transition:name="back">
                     <i>arrow_back</i>
                 </button>}
-        {matched?.at(0) === "decks" && !matched.includes("pricing") ? <a class={"active"} transition:name="active-tab">
-            <i transition:name="playing_cards_icon">playing_cards</i>
-            <span transition:name="deck_text">Deck Info</span>
-        </a> : <a href={getOppositeViewLink()} data-astro-history="replace">
-            <i transition:name="playing_cards_icon">playing_cards</i>
-            <span transition:name="deck_text">Deck Info</span>
+        {matched?.at(0) === "decks" && !matched.includes("pricing") ? <a class={"active"} transition:name="decks">
+            <i>playing_cards</i>
+            <span>Deck Info</span>
+        </a> : <a href={getOppositeViewLink()} data-astro-history="replace" transition:name="decks">
+            <i>playing_cards</i>
+            <span>Deck Info</span>
         </a>}
-        {matched?.at(0) === "prices" || matched?.includes("pricing") ? <a class={"active"} transition:name="active-tab">
-            <i transition:name="price_icon">price_check</i>
-            <span transition:name="price">Prices</span>
-        </a> : <a href={getOppositeViewLink()} data-astro-history="replace">
-            <i transition:name="price_icon">price_check</i>
-            <span transition:name="price">Prices</span>
+        {matched?.at(0) === "prices" || matched?.includes("pricing") ? <a class={"active"} transition:name="pricing">
+            <i>price_check</i>
+            <span>Prices</span>
+        </a> : <a href={getOppositeViewLink()} data-astro-history="replace" transition:name="pricing">
+            <i>price_check</i>
+            <span>Prices</span>
         </a>}
         <button transition:name="info-icon" class="circle transparent" popovertarget="disclaimer-popover">
             <i>info</i>
