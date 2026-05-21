@@ -5,12 +5,12 @@ h1, h2, h3, h4, h5, h6 {
 
 span, p, li, td, q, sub, button {
     /*noinspection CssUnresolvedCustomProperty*/
-    font-family: var(--font-outfit), system-ui;
+    font-family: var(--font-outfit), system-ui !important;
 }
 
 .chip {
     /*noinspection CssUnresolvedCustomProperty*/
-    font-family: var(--font-outfit), system-ui; !important;
+    font-family: var(--font-outfit), system-ui !important;
 }
 
 :is(div).responsive {
