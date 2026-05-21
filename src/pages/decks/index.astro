@@ -8,7 +8,7 @@ import Layout from '../../layouts/Layout.astro';
 const posts = (await getCollection('decks'))
 ---
 <Layout>
-    <main class="responsive">
+    <div class="responsive">
         {Object.values(Nation).map(nation =>
                 <section>
                     <h4>{nation}</h4>
@@ -20,5 +20,5 @@ const posts = (await getCollection('decks'))
                     </div>
                 </section>)}
 
-    </main>
+    </div>
 </Layout>

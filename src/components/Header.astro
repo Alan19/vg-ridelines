@@ -6,8 +6,8 @@ const currentPath = Astro.url.pathname.split('/').at(2);
 <header class="surface-container" style="z-index: 99999; position: sticky; top: 0">
     <nav>
         <h6 class="max primary-text"><a href={`/${REPO_NAME}`}> VG Ridelines</a></h6>
-        <a href={`/${REPO_NAME}/decks`}>
-            <button class={(currentPath === 'decks' || currentPath === 'prices') ? 'primary' : 'border'}>
+        <a href={`/${REPO_NAME}/decks`} transition:persist>
+            <button class={(currentPath === 'decks' || currentPath === 'prices') ? 'primary' : 'border'} >
                 <i>playing_cards</i>
                 Decks
             </button>

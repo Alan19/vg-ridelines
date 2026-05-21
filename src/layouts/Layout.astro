@@ -2,14 +2,16 @@
 import ClientRouter from 'astro/components/ClientRouter.astro';
 import {SITE_DESCRIPTION, SITE_TITLE} from '../consts.ts';
 import BaseHead from '../components/BaseHead.astro';
-import Navigation from "../components/Navigation.astro";
+import Header from "../components/Header.astro";
 import Footer from '../components/Footer.astro';
 import {Font} from "astro:assets";
 import '../styles/global.css';
-import PriceSwitch from '../components/PriceSwitch.astro';
+import DeckToolbar from "../components/DeckToolbar.astro";
 
 const props = Astro.props;
 const nation = props.nation
+const path = Astro.url.pathname.replace(import.meta.env.BASE_URL, '');
+const matched = path.match(/[^\/]+/g)
 ---
 
 <!doctype html>
@@ -53,11 +55,14 @@ const nation = props.nation
     <ClientRouter/>
 </head>
 <body>
-<Navigation/>
-<slot/>
-<div style="position:fixed; right: 1rem; bottom: 1rem;z-index: 10">
-    <PriceSwitch/>
+<div style="display: flex; flex-direction: column; min-height: 100vh">
+    <Header/>
+    <div style="flex: 1">
+        <slot />
+    </div>
+    {["prices", "decks"].includes(matched?.at(0) ?? "") && <DeckToolbar />}
+    <Footer/>
 </div>
-<Footer/>
+
 </body>
 </html>

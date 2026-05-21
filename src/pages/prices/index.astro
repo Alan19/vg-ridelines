@@ -12,7 +12,7 @@ const decks = await getCollection('decks').then(deckCollection => deckCollection
 // TODO Add generic / pile warning
 ---
 <Layout>
-    <main class="responsive">
+    <div class="responsive">
         <div style="display: flex;align-items: start; gap: 1rem" class="reverse-flex-mobile">
             <div style="width: 100%">
                 {Object.values(Nation).map(nation =>
@@ -34,5 +34,5 @@ const decks = await getCollection('decks').then(deckCollection => deckCollection
                         </section>)}
             </div>
         </div>
-    </main>
+    </div>
 </Layout>

@@ -1,0 +1,49 @@
+---
+import {REPO_NAME} from "../consts.ts";
+import TierTable from "./TierTable.astro";
+const path = Astro.url.pathname.replace(import.meta.env.BASE_URL, '');
+const matched = path.match(/[^\/]+/g)
+
+function getOppositeViewLink() {
+    if (matched?.at(0) === 'decks' && matched.length === 3) {
+        return `/${[REPO_NAME, ...matched, 'pricing'].join('/')}`
+    } else if (matched?.at(0) === 'decks' && matched.includes('pricing')) {
+        return `/${[REPO_NAME, ...matched.slice(0, -1)].join('/')}`
+    } else if (matched?.length === 1 && matched.at(0) === 'decks') {
+        return `/${REPO_NAME}/prices`
+    } else {
+        return `/${REPO_NAME}/decks`
+    }
+}
+---
+<dialog id="disclaimer-popover" popover>
+    <h1>Pricing Guide</h1>
+    <p>This page documents the pricing of the ridelines that I have pages for. Eventually this would document every rideline and boss unit in the game, but I will likely need volunteers to submit and update decklists as decks get upgrades.</p>
+    <h2>Pricing Tiers</h2>
+    <TierTable/>
+</dialog>
+<nav class="center-align tiny-space" style="position: sticky; bottom: 1rem; z-index: 10000" transition:name="toolbar">
+    <nav class="toolbar secondary-container small-elevate" transition:name="inner-toolbar">
+        {(matched?.length ?? 0) > 1 && matched?.at(0) === "decks" &&
+                <button onclick="history.back()" class="transparent circle">
+                    <i>arrow_back</i>
+                </button>}
+        {matched?.at(0) === "decks" && !matched.includes("pricing") ? <a class={"active"} transition:name="active-tab">
+            <i transition:name="playing_cards_icon">playing_cards</i>
+            <span transition:name="deck_text">Deck Info</span>
+        </a> : <a href={getOppositeViewLink()} data-astro-history="replace">
+            <i transition:name="playing_cards_icon">playing_cards</i>
+            <span transition:name="deck_text">Deck Info</span>
+        </a>}
+        {matched?.at(0) === "prices" || matched?.includes("pricing") ? <a class={"active"} transition:name="active-tab">
+            <i transition:name="price_icon">price_check</i>
+            <span transition:name="price">Prices</span>
+        </a> : <a href={getOppositeViewLink()} data-astro-history="replace">
+            <i transition:name="price_icon">price_check</i>
+            <span transition:name="price">Prices</span>
+        </a>}
+        <button transition:name="info-icon" class="circle transparent" popovertarget="disclaimer-popover">
+            <i>info</i>
+        </button>
+    </nav>
+</nav>

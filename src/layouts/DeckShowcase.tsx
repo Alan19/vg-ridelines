@@ -30,12 +30,12 @@ export function DeckShowcase(props: InferEntrySchema<"decks"> & { keyCardImages?
     const {nation} = props
     let flag = getFlag(nation);
     const {offense, control, keyCardImages, genericCardImages, value: deckValue, cardArt, ridelineCardImages, disadvantages, title, advantages, content} = props;
-    return <main className="responsive" style={{overflowY: "scroll"}}>
+    return <div className="responsive" style={{overflowY: "scroll"}}>
         <div className="grid" style={{flex: 10}}>
-            <div className="s12 m3 l2">
+            <div className="s12 m3 l3">
                 {cardArt}
             </div>
-            <article className="s12 m9 l7">
+            <article className="s12 m9 l6">
                 <div style={{display: "flex", alignItems: "center", justifyContent: "space-between"}}>
                     <h2 className="primary-text">{title}</h2>
                     {flag && <button className="chip fill round large">
@@ -140,6 +140,6 @@ export function DeckShowcase(props: InferEntrySchema<"decks"> & { keyCardImages?
                 </article>
             </div>
         </div>
-    </main>
+    </div>
 
 }

@@ -12,3 +12,9 @@ span, p, li, td, q, sub, button {
     /*noinspection CssUnresolvedCustomProperty*/
     font-family: var(--font-outfit), system-ui; !important;
 }
+
+:is(div).responsive {
+    max-inline-size: min(100vw, 75rem);
+    margin: 0 auto;
+    padding: 8px
+}
