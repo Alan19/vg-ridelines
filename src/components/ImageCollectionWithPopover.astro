@@ -18,8 +18,8 @@ const {images, category} = Astro.props
     return (
     <>
         <Image class="s3 vg-card clickable-img auto-height" widths={[200]} src={(typeof card === "object" ? card.src : card) as string} inferSize={true} alt=`Grade ${index} rideline card` onclick={onClick}/>
-        <dialog popover={"auto"} class="center" id={id}>
-            <Image class="vg-card" src={(typeof card === "object" ? card.src : card)} inferSize={true} alt={`${category} card ${index}`}/>
+        <dialog popover={"auto"} class="center card-preview-dialog" id={id}>
+            <Image class="vg-card dialog-img" src={(typeof card === "object" ? card.src : card)} inferSize={true} alt={`${category} card ${index}`}/>
         </dialog>
     </>);
     })}

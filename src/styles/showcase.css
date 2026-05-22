@@ -15,7 +15,6 @@
 .vg-card {
     width: 100%;
     border-radius: 0;
-    /*height: 100%;*/
 }
 
 .clickable-img {
@@ -30,6 +29,10 @@
     gap: 4px !important;
 }
 
-body:has(:popover-open) *:is(.clickable-img, button, a) {
+body:has(:popover-open) *:is(.responsive) {
     pointer-events: none;
+}
+
+.card-preview-dialog {
+    pointer-events: all;
 }
