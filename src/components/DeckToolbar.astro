@@ -15,6 +15,8 @@ function getOppositeViewLink() {
         return `/${REPO_NAME}/decks`
     }
 }
+
+const decksActive = matched?.at(0) === "decks" && !matched.includes("pricing");
 ---
 <dialog id="disclaimer-popover" popover>
     <h1>Pricing Guide</h1>
@@ -22,26 +24,20 @@ function getOppositeViewLink() {
     <h2>Pricing Tiers</h2>
     <TierTable/>
 </dialog>
-<nav class="center-align tiny-space" style="position: sticky; bottom: 1rem; z-index: 10000">
-    <nav class="toolbar secondary-container small-elevate">
+<nav class="center-align tiny-space deck-toolbar" style="position: sticky; bottom: 1rem;z-index: 100">
+    <nav class="toolbar secondary-container small-elevate" transition:persist>
         {(matched?.length ?? 0) > 1 && matched?.at(0) === "decks" &&
                 <button onclick="history.back()" class="transparent circle" transition:name="back">
                     <i>arrow_back</i>
                 </button>}
-        {matched?.at(0) === "decks" && !matched.includes("pricing") ? <a class={"active"} transition:name="decks">
+        <a class={decksActive ? "active" : ""} transition:name="decks" href={!decksActive ? getOppositeViewLink() : ""} data-astro-history="replace">
             <i>playing_cards</i>
             <span>Deck Info</span>
-        </a> : <a href={getOppositeViewLink()} data-astro-history="replace" transition:name="decks">
-            <i>playing_cards</i>
-            <span>Deck Info</span>
-        </a>}
-        {matched?.at(0) === "prices" || matched?.includes("pricing") ? <a class={"active"} transition:name="pricing">
+        </a>
+        <a class={!decksActive ? "active" : "active"} transition:name="pricing" href={decksActive ? getOppositeViewLink() : ""} data-astro-history="replace">
             <i>price_check</i>
             <span>Prices</span>
-        </a> : <a href={getOppositeViewLink()} data-astro-history="replace" transition:name="pricing">
-            <i>price_check</i>
-            <span>Prices</span>
-        </a>}
+        </a>
         <button transition:name="info-icon" class="circle transparent" popovertarget="disclaimer-popover">
             <i>info</i>
         </button>
