@@ -1,0 +1,1 @@
+This website is an experiment and a passion project. I am not affiliated nor associated with Bushiroad. I hope this site is beneficial to you and if you wish to contribute, please reach out to me! Site icon and preview art by [Sa-Dui](https://bsky.app/profile/mintsadui.bsky.social).

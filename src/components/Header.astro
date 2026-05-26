@@ -1,17 +1,20 @@
 ---
 import {REPO_NAME} from "../consts.ts";
 import {ModeToggle} from "./ModeToggle.tsx";
+import {getCollection} from "astro:content";
 const currentPath = Astro.url.pathname.split('/').at(2);
+const decks = await getCollection('decks');
+import {DeckSearch} from "./DeckSearch.tsx";
+import Image from "astro/components/Image.astro";
 ---
 <header class="surface-container" style="z-index: 99999; position: sticky; top: 0">
-    <nav>
-        <h6 class="max primary-text"><a href={`/${REPO_NAME}`}> VG Ridelines</a></h6>
-        <a href={`/${REPO_NAME}/decks`} transition:persist>
-            <button class={(currentPath === 'decks' || currentPath === 'prices') ? 'primary' : 'border'} >
-                <i>playing_cards</i>
-                Decks
-            </button>
+    <nav style="justify-content: space-between">
+        <a href={`/${REPO_NAME}`}>
+            <Image src={"/vg-ridelines/favicon.png"} alt={"an icon of inspection mutant, imigrar"} width={36} height={36}/>
         </a>
+        <div style="max-width: 32rem;display: flex;flex: 1">
+            <DeckSearch decks={decks.map(value => ({id: value.id, src: value.data["card-art"].src, title: value.data.title}))} client:only="react"/>
+        </div>
         <ModeToggle client:only="react"/>
     </nav>
 </header>
