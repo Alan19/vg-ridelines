@@ -16,12 +16,13 @@ interface Props {
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
 const {title, description, image = FallbackImage} = Astro.props;
+import icon from "../assets/favicon.png"
 ---
 
 <!-- Global Metadata -->
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<link rel="icon" href="/vg-ridelines/favicon.png"/>
+<link rel="icon" href={icon.src}/>
 <link rel="sitemap" href="/sitemap-index.xml"/>
 <link
         rel="alternate"

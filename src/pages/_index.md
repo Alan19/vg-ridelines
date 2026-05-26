@@ -4,7 +4,7 @@ Welcome to this Vanguard rideline infographic and pricing site! This site is a r
 
 <a href='/vg-ridelines/decks'>
 <article class="no-padding round primary-container medium-width">
-  <img class="responsive large" src="/vg-ridelines/img.png" style="object-position: top">
+  <img class="responsive large" src="/vg-ridelines/preview.webp" style="object-position: top">
   <div class="row absolute bottom left right padding bottom-shadow bottom-round white-text">
     <h5>List of Decks</h5>
 <i>arrow_outward</i>

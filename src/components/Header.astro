@@ -6,11 +6,12 @@ const currentPath = Astro.url.pathname.split('/').at(2);
 const decks = await getCollection('decks');
 import {DeckSearch} from "./DeckSearch.tsx";
 import Image from "astro/components/Image.astro";
+import icon from "../assets/favicon.png"
 ---
-<header class="surface-container" style="z-index: 99999; position: sticky; top: 0">
+<header class="surface-container" style="z-index: 99999; position: sticky; top: 0" transition:name="header">
     <nav style="justify-content: space-between">
-        <a href={`/${REPO_NAME}`}>
-            <Image src={"/vg-ridelines/favicon.png"} alt={"an icon of inspection mutant, imigrar"} width={36} height={36}/>
+        <a href={`/${REPO_NAME}`} >
+            <Image src={icon} alt={"an icon of inspection mutant, imigrar"} width={36} height={36}/>
         </a>
         <div style="max-width: 32rem;display: flex;flex: 1">
             <DeckSearch decks={decks.map(value => ({id: value.id, src: value.data["card-art"].src, title: value.data.title}))} client:only="react"/>

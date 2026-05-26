@@ -18,3 +18,7 @@ span, p, li, td, q, sub, button, input, div {
     margin: 0 auto;
     padding: 8px
 }
+
+::view-transition-group(toolbar), ::view-transition-group(back), ::view-transition-group(decks), ::view-transition-group(pricing-button), ::view-transition-group(info-icon), ::view-transition-group(inner-toolbar), ::view-transition-group(header) {
+    z-index: 1;
+}

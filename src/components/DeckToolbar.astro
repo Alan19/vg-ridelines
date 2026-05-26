@@ -24,8 +24,8 @@ const decksActive = matched?.at(0) === "decks" && !matched.includes("pricing");
     <h2>Pricing Tiers</h2>
     <TierTable/>
 </dialog>
-<nav class="center-align tiny-space deck-toolbar" style="position: sticky; bottom: 1rem;z-index: 100">
-    <nav class="toolbar secondary-container small-elevate" transition:persist>
+<nav class="center-align tiny-space deck-toolbar" style="position: sticky; bottom: 1rem;z-index: 100" transition:name="toolbar">
+    <nav class="toolbar secondary-container small-elevate">
         {(matched?.length ?? 0) > 1 && matched?.at(0) === "decks" &&
                 <button onclick="history.back()" class="transparent circle" transition:name="back">
                     <i>arrow_back</i>
@@ -34,7 +34,7 @@ const decksActive = matched?.at(0) === "decks" && !matched.includes("pricing");
             <i>playing_cards</i>
             <span>Deck Info</span>
         </a>
-        <a class={!decksActive ? "active" : "active"} transition:name="pricing" href={decksActive ? getOppositeViewLink() : ""} data-astro-history="replace">
+        <a class={!decksActive ? "active" : ""} transition:name="pricing-button" href={decksActive ? getOppositeViewLink() : ""} data-astro-history="replace">
             <i>price_check</i>
             <span>Prices</span>
         </a>

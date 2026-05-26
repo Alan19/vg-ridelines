@@ -17,7 +17,7 @@ const {art, id, title} = Astro.props
 <link href="/src/styles/showcase.css" rel="stylesheet" type="text/css"/>
 <a href={`/${REPO_NAME}/decks/${id}/`} style="display: contents">
     <article class="no-padding border">
-        <Image widths={[500]} src={art} alt={title} class="responsive medium" transition:name={`img_${title}`} style={{objectPosition: "top", objectFit: "cover"}} />
+        <Image widths={[500]} src={art} alt={title} class="responsive medium" transition:name={`img_${title}`} style={{objectPosition: "top", objectFit: "cover"}}/>
         <div class="absolute bottom left right padding bottom-shadow white-text" transition:animate="none">
             <div>
                 <h6 style="font-size: large">{title}</h6>
