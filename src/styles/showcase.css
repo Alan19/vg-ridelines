@@ -29,10 +29,14 @@
     gap: 4px !important;
 }
 
-body:has(:popover-open) *:is(.responsive) {
+body:has(:popover-open) {
     pointer-events: none;
 }
 
 .card-preview-dialog {
     pointer-events: all;
+}
+
+.dialog-img {
+    height: 100%;
 }
