@@ -1,5 +1,5 @@
 ---
-title: Liael=Odium
+title: Liael=​Odium
 nation: Dark States
 card-art: '../../../assets/Liael=Odium.png'
 rideline: [
