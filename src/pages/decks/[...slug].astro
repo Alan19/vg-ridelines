@@ -4,7 +4,7 @@ import Layout from '../../layouts/Layout.astro';
 import {DeckShowcase} from '../../layouts/DeckShowcase.tsx';
 import Image from 'astro/components/Image.astro';
 import ImageCollectionWithPopover from "../../components/ImageCollectionWithPopover.astro";
-import {getPricingNumbers, getPricingTier, PricingCategory, pricingGuide} from "../../pricing.ts";
+import {getPricingNumbers, getPricingTier, PricingCategory, pricingGuide, type PricingTiers} from "../../pricing.ts";
 
 export async function getStaticPaths() {
     const posts = await getCollection('decks');
@@ -17,15 +17,21 @@ type Props = CollectionEntry<'decks'>;
 
 const post = Astro.props;
 const {Content} = await render(post);
-const pricing = getPricingNumbers(pricingGuide[post.id])
-const pricingTiers = {
-    core: getPricingTier(pricing.coreCardCosts, PricingCategory.CORE),
-    generics: getPricingTier(pricing.genericCardCosts, PricingCategory.GENERICS),
-    total: getPricingTier(pricing.total, PricingCategory.TOTAL)
+let pricingTiers;
+if (pricingGuide[post.id]) {
+    const pricing = getPricingNumbers(pricingGuide[post.id])
+    if (pricing) {
+        pricingTiers = {
+            core: getPricingTier(pricing.coreCardCosts, PricingCategory.CORE),
+            generics: getPricingTier(pricing.genericCardCosts, PricingCategory.GENERICS),
+            total: getPricingTier(pricing.total, PricingCategory.TOTAL)
+        }
+    }
 }
+
 ---
 <Layout {...post.data}>
-    <DeckShowcase {...post.data} coreCostTier={pricingTiers.core} genericsCostTier={pricingTiers.generics} totalCostTier={pricingTiers.total}>
+    <DeckShowcase {...post.data} pricingTiers={pricingTiers}>
         <Image widths={[500]} class="card-art" src={post.data['card-art']} alt={post.data.title} transition:name={`img_${post.data.title}`} slot="card-art"/>
         <Content slot="content"/>
         <ImageCollectionWithPopover slot="ridelineCardImages" images={post.data.rideline} category="ridelineCardImages"/>

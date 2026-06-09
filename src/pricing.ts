@@ -65,9 +65,10 @@ async function getPricingGuide() {
 // Check all the CSVs and get the prices for them
 export const pricingGuide: { [p: string]: DeckPricing } = await getPricingGuide()
 
-const deckTotals = Object.values(pricingGuide).map(value => getPricingNumbers(value).total);
-const coreTotals = Object.values(pricingGuide).map(value => getPricingNumbers(value).coreCardCosts);
-const genericTotals = Object.values(pricingGuide).map(value => getPricingNumbers(value).genericCardCosts);
+const pricing = Object.values(pricingGuide).map(value => getPricingNumbers(value));
+const deckTotals = pricing.map(value => value?.total);
+const coreTotals = pricing.map(value => value?.coreCardCosts);
+const genericTotals = pricing.map(value => value?.genericCardCosts);
 
 const rounding = 25
 export const deckTotalStats = {
@@ -147,3 +148,10 @@ export function getPricingNumbers({core, generics}: DeckPricing) {
     const isAnyListingUnavailable = core.concat(generics).some(value => !value.lowPrice)
     return {coreCardCosts, genericCardCosts, coreCardCount, genericCardCount, total, isAnyListingUnavailable};
 }
+
+
+export type PricingTiers = {
+    core: 1 | 2 | 3 | 4 | 5;
+    generics: 1 | 2 | 3 | 4 | 5;
+    total: 1 | 2 | 3 | 4 | 5;
+};

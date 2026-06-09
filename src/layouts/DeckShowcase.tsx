@@ -8,6 +8,7 @@ import lyricalMonasterio from "../assets/flags/Lyrical Monasterio.png"
 import {Nation} from "../content.config.ts";
 import type {ReactNode} from "react";
 import '../styles/showcase.css'
+import type {PricingTiers} from "../pricing.ts";
 
 function getFlag(nation: Nation) {
     switch (nation) {
@@ -26,16 +27,16 @@ function getFlag(nation: Nation) {
     }
 }
 
-export function DeckShowcase(props: InferEntrySchema<"decks"> & { keyCardImages?: ReactNode, genericCardImages?: ReactNode, cardArt?: ReactNode, ridelineCardImages?: ReactNode, content?: ReactNode, coreCostTier: number, genericsCostTier: number, totalCostTier: number }) {
+export function DeckShowcase(props: InferEntrySchema<"decks"> & { keyCardImages?: ReactNode, genericCardImages?: ReactNode, cardArt?: ReactNode, ridelineCardImages?: ReactNode, content?: ReactNode, pricingTiers?: PricingTiers }) {
     const {nation} = props
     let flag = getFlag(nation);
     const {offense, control, keyCardImages, genericCardImages, value: deckValue, cardArt, ridelineCardImages, disadvantages, title, advantages, content} = props;
     return <div className="responsive" style={{overflowY: "scroll"}}>
         <div className="grid" style={{flex: 10}}>
-            <div className="s12 m3 l3">
+            <div className="s12 m3 l2">
                 {cardArt}
             </div>
-            <article className="s12 m9 l6">
+            <article className="s12 m9 l7">
                 <div style={{display: "flex", alignItems: "center", justifyContent: "space-between"}}>
                     <h2 className="primary-text">{title}</h2>
                     {flag && <button className="chip fill round large">
@@ -62,24 +63,26 @@ export function DeckShowcase(props: InferEntrySchema<"decks"> & { keyCardImages?
                 <div>
                     <h3>Other Info</h3>
                     <table className="no-space">
-                        <thead>
-                        <tr>
-                            <th>Price Category</th>
-                            <th>Rating</th>
-                        </tr>
-                        </thead>
-                        <tr>
-                            <td>Core</td>
-                            <td>{props.coreCostTier}</td>
-                        </tr>
-                        <tr>
-                            <td>Generics</td>
-                            <td>{props.genericsCostTier}</td>
-                        </tr>
-                        <tr>
-                            <td>Total</td>
-                            <td>{props.totalCostTier}</td>
-                        </tr>
+                        {props.pricingTiers && <>
+                            <thead>
+                            <tr>
+                                <th>Price Category</th>
+                                <th>Rating</th>
+                            </tr>
+                            </thead>
+                            <tr>
+                                <td>Core</td>
+                                <td>{props.pricingTiers.core}</td>
+                            </tr>
+                            <tr>
+                                <td>Generics</td>
+                                <td>{props.pricingTiers.generics}</td>
+                            </tr>
+                            <tr>
+                                <td>Total</td>
+                                <td>{props.pricingTiers.total}</td>
+                            </tr>
+                        </>}
                         <thead>
                         <tr>
                             <th>Viability Category</th>
